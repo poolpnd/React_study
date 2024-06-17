@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Timer from "./Timer";
 import { BsFillPlayFill, BsPauseFill, BsStopFill } from "react-icons/bs";
+import { CountContext } from "../contexts/counter-context";
 
 export default function CountDown() {
+  const {count, setCount} = useContext(CountContext)
   const [hours, setHours] = useState(0);
   const [mins, setMins] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -93,6 +95,9 @@ export default function CountDown() {
 
   return (
     <div>
+      <button className="btn" onClick={() =>setCount(prev => prev+1)}>
+        {count}
+      </button>
       {showEndScreen.show && <h1 className="title"> {showEndScreen.message}</h1>}
 
       <Timer
